@@ -1,11 +1,25 @@
 {
-  "name": "qrcode-render-simple",
+  "name": "qrcode-cloud-ready",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "init-db": "node scripts/init-db.js",
+    "import-sqlite": "node scripts/import-sqlite.js",
+    "create-admin": "node scripts/create-admin.js",
+    "sync": "node scripts/sync-once.js"
   },
   "dependencies": {
-    "express": "^4.19.2"
-  }
+    "bcryptjs": "^2.4.3",
+    "connect-pg-simple": "^9.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "helmet": "^7.1.0",
+    "node-cron": "^3.0.3",
+    "pg": "^8.12.0",
+    "puppeteer": "^24.0.0",
+    "sqlite3": "^5.1.7"
+  },
+  "engines": { "node": ">=20" }
 }

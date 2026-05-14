@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: qrcode
+      POSTGRES_USER: qrcode
+      POSTGRES_PASSWORD: qrcode_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://qrcode:qrcode_password@db:5432/qrcode
+      SESSION_SECRET: cambia_questa_stringa
+      ADMIN_USER: admin
+      ADMIN_PASSWORD: admin123
+      SYNC_CRON: "0 1 * * *"
+      PUPPETEER_HEADLESS: "true"
+    ports:
+      - "3000:3000"
+volumes:
+  postgres_data:

@@ -1,65 +1,7 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QRCode Browser</title>
-
-<style>
-body{
-font-family:Arial;
-background:#f3f4f6;
-padding:40px;
-}
-
-.card{
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
-max-width:700px;
-margin:auto;
-}
-
-button{
-background:#2563eb;
-color:white;
-border:none;
-padding:12px 18px;
-border-radius:10px;
-cursor:pointer;
-font-weight:bold;
-}
-</style>
-</head>
-
-<body>
-
-<div class="card">
-
-<h1>QRCode Browser Online</h1>
-
-<p>Deploy Render riuscito.</p>
-
-<button onclick="checkStatus()">
-Controlla Stato
-</button>
-
-<p id="status"></p>
-
-</div>
-
-<script>
-async function checkStatus(){
-
-const res = await fetch('/api/status');
-const data = await res.json();
-
-document.getElementById('status').innerText =
-data.status;
-
-}
-</script>
-
-</body>
-</html>
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>QRCode Browser Cloud</title><link rel="stylesheet" href="/style.css"></head><body>
+<div id="loginView" class="login-wrapper"><form id="loginForm" class="login-card"><h1>QRCode Browser</h1><p>Accesso amministratore</p><input id="username" type="text" placeholder="Username" autocomplete="username" required><input id="password" type="password" placeholder="Password" autocomplete="current-password" required><button type="submit">Accedi</button><div id="loginError" class="error"></div></form></div>
+<div id="appView" class="app hidden"><header class="topbar"><div><h1>QRCode Browser Cloud</h1><p>Dashboard RT / AE con PostgreSQL</p></div><div class="actions"><button id="syncButton" class="success">Sincronizza ora</button><button id="logoutButton">Esci</button></div></header>
+<section class="status-card"><div><strong>Stato sincronizzazione</strong><p id="syncStatus">Sistema pronto</p></div><div class="timer" id="syncTimer">0s</div></section>
+<section class="toolbar"><input id="searchInput" placeholder="Cerca matricola, P.IVA, stato, CF tecnico..."><button id="searchButton">Cerca</button><button id="resetButton">Reset</button></section>
+<section class="table-card"><div class="table-meta"><span id="totalRows">0 record</span></div><div class="table-scroll"><table><thead><tr><th>Matricola</th><th>Stato</th><th>Ultima VP</th><th>Risultato VP</th><th>P.IVA VP</th><th>Ultima trasmissione</th><th>FW</th><th>P.IVA</th><th>CF Tecnico</th><th>Ultimo controllo</th><th>AE</th></tr></thead><tbody id="tableBody"></tbody></table></div></section></div>
+<script src="/app.js"></script></body></html>
